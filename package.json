@@ -22,5 +22,16 @@
   },
   "devDependencies": {
     "standard": "^16.0.3"
-  }
+  },
+  "bin": {
+    "status-api": "start.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alanshaw/david-status-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alanshaw/david-status-api/issues"
+  },
+  "homepage": "https://github.com/alanshaw/david-status-api#readme"
 }
