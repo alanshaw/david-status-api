@@ -1,0 +1,26 @@
+{
+  "name": "@david-dm/status-api",
+  "version": "0.0.0",
+  "description": "Aggregation of project and info APIs.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node bin/start",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "standard"
+  },
+  "author": "Alan Shaw",
+  "license": "MIT",
+  "dependencies": {
+    "bent": "^7.3.12",
+    "compression": "^1.7.4",
+    "express": "^5.0.0-alpha.8",
+    "lru-cache": "^6.0.0",
+    "piggybacker": "^2.0.0",
+    "rc": "^1.2.8",
+    "redis": "^3.0.2"
+  },
+  "devDependencies": {
+    "standard": "^16.0.3"
+  }
+}
