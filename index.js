@@ -10,8 +10,10 @@ export async function start (config) {
   if (!config) throw new Error('missing config')
   const cache = config.cache?.type === 'redis' ? new RedisCache(config.cache) : new MemoryCache(config.cache)
   if (cache instanceof MemoryCache) console.warn('🚨 Using in memory cache')
-  const projApi = new ProjApi({ url: config.projApiUrl })
   const infoApi = new InfoApi({ url: config.infoApiUrl })
+  console.log(`Using Info API at ${config.infoApiUrl}`)
+  const projApi = new ProjApi({ url: config.projApiUrl })
+  console.log(`Using Project API at ${config.projApiUrl}`)
   const statusBase = new StatusBase({ projApi, infoApi, cache })
 
   const app = express()
