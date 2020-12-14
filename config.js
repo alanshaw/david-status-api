@@ -3,7 +3,7 @@ import rc from 'rc'
 const MINUTE = 1000 * 60
 const HOUR = MINUTE * 60
 
-export default rc('status-api', {
+export default rc('david', {
   port: 3002,
   infoApiUrl: 'http://localhost:3000',
   projApiUrl: 'http://localhost:3001',
