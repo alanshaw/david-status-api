@@ -62,6 +62,7 @@ export class StatusBase {
     const info = await (this._infoApi.get(deps))
     status = info // IDK maybe we want to augment with info about where this data came from?
 
+    console.log(`Got status for ${cacheKey}: ${info.status}`)
     await this._cache.set(cacheKey, status)
     return status
   }
