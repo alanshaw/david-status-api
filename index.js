@@ -33,7 +33,14 @@ export async function start (config) {
       res.status(500)
       file = badgePath('unknown', { type, style })
     }
-    res.sendFile(file)
+    res.sendFile(file, {
+      lastModified: false,
+      etag: false,
+      headers: {
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        Expires: new Date().toUTCString()
+      }
+    })
   })
 
   app.get('/:service/:owner/:repo', async (req, res) => {
