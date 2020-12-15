@@ -1,7 +1,7 @@
 {
   "name": "@david-dm/status-api",
   "version": "0.0.0",
-  "description": "Aggregation of project and info APIs.",
+  "description": "Project and Info API aggregator and badger server.",
   "main": "index.js",
   "type": "module",
   "scripts": {

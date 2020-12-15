@@ -21,6 +21,21 @@ export async function start (config) {
   app.use(compress())
   app.use(cors)
 
+  app.get('/:service/:owner/:repo.svg', async (req, res) => {
+    const { service, owner, repo } = req.params
+    const { type, ref, path, style } = req.query
+    let file
+    try {
+      const { status } = await statusBase.get(service, owner, repo, { type, ref, path })
+      file = badgePath(status, { type, style })
+    } catch (err) {
+      console.error(err)
+      res.status(500)
+      file = badgePath('unknown', { type, style })
+    }
+    res.sendFile(file)
+  })
+
   app.get('/:service/:owner/:repo', async (req, res) => {
     const { service, owner, repo } = req.params
     const { type, ref, path } = req.query
@@ -34,4 +49,11 @@ export async function start (config) {
       resolve(server)
     })
   })
+}
+
+function badgePath (status, opts) {
+  opts = opts ?? {}
+  const type = opts.type ? opts.type + '-' : ''
+  const style = opts.style === 'flat-square' ? '-flat-square' : ''
+  return new URL(`images/${type}${status}${style}.svg`, import.meta.url).toString().slice(7)
 }
