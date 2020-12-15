@@ -13,19 +13,24 @@ export class RedisCache {
     this._redis.setAsync = promisify(this._redis.set).bind(this._redis)
     this._redis.delAsync = promisify(this._redis.del).bind(this._redis)
     this._maxAge = config.maxAge ?? HOUR
+    this._keyPrefix = config.keyPrefix ?? 'status:'
+  }
+
+  keyPrefix (k) {
+    return `${this._keyPrefix}${k}`
   }
 
   async get (k) {
-    const v = JSON.parse(await this._redis.getAsync(k))
+    const v = JSON.parse(await this._redis.getAsync(this.keyPrefix(k)))
     return v
   }
 
   async set (k, v) {
-    await this._redis.setAsync(k, JSON.stringify(v), 'PX', this._maxAge)
+    await this._redis.setAsync(this.keyPrefix(k), JSON.stringify(v), 'PX', this._maxAge)
   }
 
   del (k) {
-    return this._redis.delAsync(k)
+    return this._redis.delAsync(this.keyPrefix(k))
   }
 }
 
