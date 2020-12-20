@@ -58,7 +58,7 @@ export class StatusBase {
     }
 
     const pkg = await this._projApi.get(service, owner, repo, opts)
-    const deps = pkg?.[type ?? 'dependencies']
+    const deps = pkg?.[type ? `${type}Dependencies` : 'dependencies']
     const info = await (this._infoApi.get(deps))
     status = info // IDK maybe we want to augment with info about where this data came from?
 
